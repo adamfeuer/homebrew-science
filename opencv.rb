@@ -161,6 +161,6 @@ class Opencv < Formula
     system ENV.cxx, "test.cpp", "-I#{include}", "-L#{lib}", "-o", "test"
     assert_equal `./test`.strip, version.to_s
 
-    assert_match version.to_s, shell_output('$(if [ -n "$VIRTUAL_ENV" ]; then echo echo ""; deactivate; which python; else echo which python; fi) -c "import cv2; print(cv2.__version__)"')
+    assert_match version.to_s, shell_output('$(if [ -n "$VIRTUAL_ENV" ]; then echo echo ""; deactivate; python -c "import cv2; print(cv2.__version__)"; else  echo echo $(python -c "import cv2; print(cv2.__version__)"); fi)')
   end
 end
