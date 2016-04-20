@@ -161,8 +161,8 @@ class Opencv < Formula
     system ENV.cxx, "test.cpp", "-I#{include}", "-L#{lib}", "-o", "test"
     assert_equal `./test`.strip, version.to_s
 
-    installed_version = shell_output('python -c "import cv2; print(cv2.__version__)"); fi)')
-    installed_version = installed.version.gsub( /_(\d+)$/, '' )
-    assert_match version.to_s, installed_version
+    installed_version = version.to_s.gsub( /_(\d+)$/, '' )
+    reported_version = shell_output('python -c "import cv2; print(cv2.__version__)"); fi)')
+    assert_match installed_version, reported_version 
   end
 end
