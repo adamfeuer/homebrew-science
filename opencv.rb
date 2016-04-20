@@ -162,7 +162,7 @@ class Opencv < Formula
     assert_equal `./test`.strip, version.to_s
 
     installed_version = version.to_s.gsub( /_(\d+)$/, '' )
-    reported_version = shell_output('python -c "import cv2; print(cv2.__version__)"); fi)')
+    reported_version = shell_output('$(if [ -n "$VIRTUAL_ENV" ]; then echo echo ""; deactivate; python -c "import cv2; print(cv2.__version__)"; else  echo echo $(python -c "import cv2; print(cv2.__version__)"); fi)')
     assert_match installed_version, reported_version 
   end
 end
