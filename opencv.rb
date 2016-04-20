@@ -159,7 +159,7 @@ class Opencv < Formula
       }
     EOS
     system ENV.cxx, "test.cpp", "-I#{include}", "-L#{lib}", "-o", "test"
-    assert_equal `./test`.strip, version.to_s
+    assert_equal `./test`.strip.gsub( /_(\d+)$/, '' ), version.to_s.gsub( /_(\d+)$/, '' )  
 
     installed_version = version.to_s.gsub( /_(\d+)$/, '' )
     reported_version = shell_output('$(if [ -n "$VIRTUAL_ENV" ]; then echo echo ""; deactivate; python -c "import cv2; print(cv2.__version__)"; else  echo echo $(python -c "import cv2; print(cv2.__version__)"); fi)')
